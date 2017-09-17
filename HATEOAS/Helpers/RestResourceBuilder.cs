@@ -29,7 +29,7 @@ namespace TreinaWeb.MinhaApi.Api.HATEOAS.Helpers
                 throw new ArgumentException($"Era esperado um RestResource, porém, foi informado {resource.GetType().FullName}");
 
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
-            IResourceBuilder resourceBuilder = (IResourceBuilder)Activator.CreateInstance(currentAssembly.GetType($"TreinaWeb.MinhaApi.Api.HATEOAS.ResourceBuilders.Impl{dtoType.Name}ResourceBuilder"));
+            IResourceBuilder resourceBuilder = (IResourceBuilder)Activator.CreateInstance(currentAssembly.GetType($"TreinaWeb.MinhaApi.Api.HATEOAS.ResourceBuilders.Impl.{dtoType.Name}ResourceBuilder"));
 
             if(enumerable == null)
             {

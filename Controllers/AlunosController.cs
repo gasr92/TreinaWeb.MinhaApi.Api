@@ -14,6 +14,7 @@ using TreinaWeb.MinhaApi.Repositorios.Entity;
 
 namespace TreinaWeb.MinhaApi.Api.Controllers
 {
+    [RoutePrefix("api/alunos")] // maneira padrão
     public class AlunosController : ApiController
     {
         private IRepositorioTreinaWeb<Aluno, int> _repositorioAlunos = new RepositorioAlunos(new MinhaApiDbContext());
@@ -54,7 +55,18 @@ namespace TreinaWeb.MinhaApi.Api.Controllers
 
             AlunoDTO dto = AutoMapperManager.Instance.Mapper.Map<Aluno, AlunoDTO>(aluno);
 
-            return Content(HttpStatusCode.Found, dto);
+            // Não pode retornar Found com uso de HATEOS, pois nesse caso é retornado 302 (redirecionamento)
+            //return Content(HttpStatusCode.Found, dto);
+            return Content(HttpStatusCode.OK, dto);
+        }
+
+        [Route("por-nome/{nomeAluno}")] // o nome do parâmetro {nomeAluno} precisa ser igual ao parâmetro recebido
+        public IHttpActionResult Get(string nomeAluno)
+        {
+            List<Aluno> alunos = _repositorioAlunos.Selecionar(a => a.Nome.ToLower().Contains(nomeAluno.ToLower()));
+            List<AlunoDTO> dtos = AutoMapperManager.Instance.Mapper.Map<List<Aluno>, List<AlunoDTO>>(alunos);
+
+            return Ok(dtos);
         }
 
         //public HttpResponseMessage Post([FromBody]Aluno aluno) // Não é mais feito desta maneira
