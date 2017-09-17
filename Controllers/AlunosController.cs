@@ -14,6 +14,7 @@ using TreinaWeb.MinhaApi.Repositorios.Entity;
 
 namespace TreinaWeb.MinhaApi.Api.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/alunos")] // maneira padrão
     public class AlunosController : ApiController
     {

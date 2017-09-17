@@ -1,0 +1,10 @@
+﻿Pacotes necessários para autenticação
+
+- Microsoft.AspNet.WebApi.Owin
+- Microsoft.Owin.Host.Web
+- Microsoft.Owin.Security.OAuth
+- Microsoft.Owin.Cors
+
+
+POST para gerar o token
+http://localhost:52502/token
